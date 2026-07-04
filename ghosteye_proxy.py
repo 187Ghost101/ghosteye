@@ -157,7 +157,7 @@ async def handle_client(reader, writer):
                          b"Content-Length: " + str(len(content)).encode() +
                          b"\r\nAccess-Control-Allow-Origin: *\r\n\r\n" + content)
         else:
-            err = b"<h1>GHOSTEYE — index.html not found</h1>"
+            err = b"<h1>GHOSTEYE - index.html not found</h1>"
             writer.write(b"HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n" + err)
         await writer.drain()
         writer.close()
