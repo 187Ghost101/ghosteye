@@ -3,308 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHOSTEYE — Live Demo | ghost1o1</title>
-<meta name="description" content="GHOSTEYE v3.0 — RTSP/HLS camera pentest platform. Live demo by ghost1o1.">
+<title>GHOSTEYE — L'ÉVEIL NOCTURNE · ghost1o1</title>
 <style>
-:root {
-  --bg: #0a0a0f;
-  --bg-2: #0f0f1a;
-  --bg-3: #141428;
-  --border: #1a1a35;
-  --accent: #e63946;
-  --accent-2: #ff6b6b;
-  --green: #2ecc71;
-  --yellow: #f39c12;
-  --cyan: #00d4ff;
-  --purple: #9b59b6;
-  --orange: #e67e22;
-  --text: #c8c8d0;
-  --text-2: #8888a0;
-  --font: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-}
+:root{--bg:#0a0a0f;--bg2:#0f0f1a;--bg3:#141428;--border:#1a1a35;--accent:#e63946;--green:#2ecc71;--cyan:#00d4ff;--text:#c8c8d0;--text2:#8888a0;--font:'JetBrains Mono','Fira Code','Consolas',monospace}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6;overflow-x:hidden}
-.container{max-width:1200px;margin:0 auto;padding:40px 20px}
-.hero{text-align:center;padding:80px 20px 40px;position:relative}
-.hero::before{content:'';position:absolute;top:0;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(230,57,70,0.15) 0%,transparent 70%);transform:translateX(-50%);z-index:-1}
-.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);color:var(--accent);letter-spacing:8px;margin-bottom:10px;font-weight:900}
-.hero .sub{color:var(--cyan);font-size:1.1rem;letter-spacing:3px;margin-bottom:30px}
-.hero .tagline{color:var(--text-2);font-style:italic;margin-bottom:40px}
-.badges{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:40px}
-.badges a{text-decoration:none}
-.btn{display:inline-block;padding:14px 28px;background:var(--bg-3);border:2px solid var(--accent);color:var(--accent);text-decoration:none;font-family:var(--font);font-size:13px;letter-spacing:1px;border-radius:4px;transition:all 0.2s;cursor:pointer}
-.btn:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,0.3)}
-.btn-cyan{border-color:var(--cyan);color:var(--cyan)}
-.btn-cyan:hover{background:var(--cyan);color:#000;box-shadow:0 8px 20px rgba(0,212,255,0.3)}
-.btn-green{border-color:var(--green);color:var(--green)}
-.btn-green:hover{background:var(--green);color:#000;box-shadow:0 8px 20px rgba(46,204,113,0.3)}
-.btn-purple{border-color:var(--purple);color:var(--purple)}
-.btn-purple:hover{background:var(--purple);color:#fff;box-shadow:0 8px 20px rgba(155,89,182,0.3)}
-.btn-group{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-bottom:60px}
-.section{margin-bottom:80px}
-.section h2{color:var(--cyan);font-size:2rem;margin-bottom:20px;letter-spacing:2px;border-bottom:2px solid var(--border);padding-bottom:10px}
-.grid{display:grid;gap:20px}
-.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.card{background:var(--bg-2);border:1px solid var(--border);border-radius:6px;padding:20px;transition:all 0.2s}
-.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-.card h3{color:var(--accent);font-size:1.1rem;margin-bottom:10px}
-.card p{color:var(--text-2);font-size:0.9rem}
-.card .ico{font-size:2rem;margin-bottom:10px;display:block}
-code{background:var(--bg-3);padding:2px 8px;border-radius:3px;color:var(--green);font-size:0.9em}
-pre{background:#000;border:1px solid var(--border);border-radius:4px;padding:15px;overflow-x:auto;color:var(--green);font-size:0.85rem}
-.devices{background:var(--bg-2);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:30px}
-.device{display:flex;align-items:center;justify-content:space-between;padding:10px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
-.device:last-child{border-bottom:none}
-.device .name{color:var(--cyan);font-weight:bold}
-.device .meta{color:var(--text-2);font-size:0.85rem}
-.status{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
-.status.online{background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
-.status.warning{background:var(--yellow);box-shadow:0 0 8px var(--yellow)}
-.status.danger{background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 1s infinite}
-.status.offline{background:#555}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.footer{text-align:center;padding:40px 20px;color:var(--text-2);border-top:1px solid var(--border);margin-top:60px}
-.footer .sigil{font-size:1.5rem;letter-spacing:8px;color:var(--accent);margin-bottom:10px}
-.links a{color:var(--cyan);text-decoration:none;margin:0 10px}
-.links a:hover{text-decoration:underline}
-.alert{background:rgba(230,57,70,0.1);border:1px solid var(--accent);border-radius:4px;padding:15px;margin:20px 0;color:var(--text)}
-.alert strong{color:var(--accent)}
-@media(max-width:600px){.hero{padding:40px 10px 20px}.hero h1{letter-spacing:4px}.section h2{font-size:1.4rem}}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.frame{max-width:900px;width:100%}
+.logo{text-align:center;color:var(--accent);font-size:14px;letter-spacing:3px;line-height:1.2;margin-bottom:30px;text-shadow:0 0 20px rgba(230,57,70,0.3);white-space:pre}
+.tagline{text-align:center;font-style:italic;color:var(--text2);margin-bottom:40px;font-size:12px}
+.tagline em{color:var(--cyan);font-style:normal}
+.hero{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);border:1px solid var(--border);border-radius:8px;padding:30px;margin-bottom:25px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.hero h1{font-size:22px;color:var(--accent);margin-bottom:10px;letter-spacing:1px}
+.hero p{color:var(--text2);font-size:13px;line-height:1.6}
+.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:30px}
+.action{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:18px;text-decoration:none;color:inherit;transition:all .2s;display:block}
+.action:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 20px rgba(230,57,70,0.15)}
+.action .ico{font-size:22px;margin-bottom:8px}
+.action .ttl{color:var(--cyan);font-size:13px;font-weight:bold;margin-bottom:4px}
+.action .desc{color:var(--text2);font-size:11px;line-height:1.4}
+.status{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:15px;display:flex;align-items:center;gap:10px;margin-bottom:30px}
+.status .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.status .txt{font-size:12px;color:var(--text)}
+.code{background:#000;border:1px solid var(--border);border-radius:4px;padding:15px;font-size:11px;color:var(--green);overflow-x:auto;margin-top:10px;line-height:1.5}
+.code .comment{color:var(--text2)}
+.code .accent{color:var(--accent)}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:30px}
+.feat{background:var(--bg2);border-left:3px solid var(--accent);padding:12px;font-size:11px}
+.feat .ttl{color:var(--cyan);font-weight:bold;margin-bottom:4px;font-size:12px}
+.feat .desc{color:var(--text2)}
+.quote{text-align:center;padding:20px;font-style:italic;color:var(--text2);font-size:13px;border-top:1px solid var(--border);margin-top:20px}
+.quote em{color:var(--accent);font-style:normal;font-weight:bold}
+footer{text-align:center;margin-top:30px;color:var(--text2);font-size:10px;letter-spacing:1px}
+footer a{color:var(--cyan);text-decoration:none}
+footer a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
+<div class="frame">
+
+<pre class="logo">
+   ▄█████ █  ██  ▄█████ ▄█████▄  ██   ██ ▄█████ █    ██  ██ ██    ██
+  ██      ██▄██  ██     ██   ██  ██▄▄▄██ ██     ██    ██  ██ ██    ██
+  ██  ███ ██▀██  █████  ██████   ██   ██ █████  ██    ██  ██ ██    ██
+  ██   ██ ██  ██ ██     ██   ██  ██   ██ ██      ██  ▄██  ██  ██  ██
+   ▀████▀ ██  ██ ▀█████ ██   ██  ██   ██ ▀█████   ▀███▀██▄██  ▀███▀
+</pre>
+
+<div class="tagline">
+<em>L'ÉVEIL NOCTURNE</em> · "There is no lock. Du silence naît la lumière."
+</div>
 
 <div class="hero">
-  <h1>GHOSTEYE</h1>
-  <div class="sub">RTSP / HLS · CAMERA PENTEST PLATFORM</div>
-  <div class="tagline">— There is no lock. —</div>
-  <div class="badges">
-    <a href="https://github.com/187Ghost101/ghosteye"><img src="https://img.shields.io/badge/VERSION-3.0-00d4ff?style=flat-square" alt="Version"></a>
-    <a href="https://github.com/187Ghost101/ghosteye"><img src="https://img.shields.io/badge/STATUS-OPERATIONAL-2ecc71?style=flat-square" alt="Status"></a>
-    <a href="https://github.com/187Ghost101/ghost1o1"><img src="https://img.shields.io/badge/GHOST1O1-NOCTURNE-e63946?style=flat-square" alt="GHOST1O1"></a>
-    <a href="https://github.com/187Ghost101/ghosteye/blob/main/LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-f39c12?style=flat-square" alt="License"></a>
-  </div>
-  <div class="btn-group">
-    <a href="https://github.com/187Ghost101/ghosteye" class="btn">⚡ GITHUB REPO</a>
-    <a href="https://replit.com/github/187Ghost101/ghosteye" class="btn btn-cyan">☁ RUN ON REPLIT</a>
-    <a href="https://hub.docker.com/r/187ghost101/ghosteye" class="btn btn-green">🐳 DOCKER HUB</a>
-    <a href="https://github.com/187Ghost101/ghosteye/blob/main/ghosteye.html" class="btn btn-purple">📋 DOWNLOAD HTML</a>
-  </div>
+<h1>🎯 GHOSTEYE — RTSP/HLS Camera Pentest Platform</h1>
+<p>Audit caméras IoT en 60 secondes. Dashboard live, 9 panels, zero install complexe. Conçu pour le protocole GHOST1O1 (Observer / Cartographier / Instrumenter / Exploiter / Partager).</p>
 </div>
 
-<div class="container">
-
-<div class="alert">
-  <strong>⚠ LIVE DEMO — MODE STATIQUE</strong> — Cette page est une démo hébergée sur GitHub Pages. Les streams RTSP réels nécessitent le proxy Python. <a href="https://github.com/187Ghost101/ghosteye/blob/main/INSTALL.md" style="color:var(--cyan)">Voir INSTALL.md</a> pour le mode complet.
+<div class="status">
+<div class="dot"></div>
+<div class="txt">STATUS: OPERATIONAL · v12.0 · 6+ repos live · 3+ tutorials en ligne</div>
 </div>
 
-<section class="section">
-<h2>◢ 9 Panels · 1 Dashboard</h2>
-<div class="grid grid-3">
-  <div class="card">
-    <span class="ico">📡</span>
-    <h3>Live Streams</h3>
-    <p>HLS live streaming, presets Hikvision/Dahua/OEM, snapshots, modal fullscreen.</p>
-  </div>
-  <div class="card">
-    <span class="ico">🔍</span>
-    <h3>Discovery</h3>
-    <p>Scan réseau passif + actif, identification devices, fingerprint.</p>
-  </div>
-  <div class="card">
-    <span class="ico">🌐</span>
-    <h3>ONVIF</h3>
-    <p>WS-Discovery multicast, GetDeviceInformation SOAP, GetCapabilities.</p>
-  </div>
-  <div class="card">
-    <span class="ico">⚡</span>
-    <h3>PortScan</h3>
-    <p>Async port scanner, presets caméras (554, 8899, 37777, 9527).</p>
-  </div>
-  <div class="card">
-    <span class="ico">🎯</span>
-    <h3>RTSP Brute</h3>
-    <p>55 paths RTSP pré-chargés, brute force par marque, export JSON.</p>
-  </div>
-  <div class="card">
-    <span class="ico">🔑</span>
-    <h3>Credentials</h3>
-    <p>15 marques pré-chargées, test live, validation par hash.</p>
-  </div>
-  <div class="card">
-    <span class="ico">💣</span>
-    <h3>Exploitation</h3>
-    <p>CVE matching, PoC lab-only, RCE Hikvision, bypass Dahua.</p>
-  </div>
-  <div class="card">
-    <span class="ico">🐚</span>
-    <h3>Shells</h3>
-    <p>Listener intégré, sessions actives, command queue, multi-target.</p>
-  </div>
-  <div class="card">
-    <span class="ico">♾️</span>
-    <h3>Persistence</h3>
-    <p>Payload generator, lab-only, cleaner, anti-forensic.</p>
-  </div>
-</div>
-</section>
+<h2 style="color:var(--accent);font-size:14px;letter-spacing:1px;margin-bottom:12px">⚡ DÉMARRER EN 60 SECONDES</h2>
 
-<section class="section">
-<h2>◢ Sample Devices (Démo)</h2>
-<div class="devices">
-  <div class="device">
-    <div><span class="status online"></span><span class="name">10.0.0.1</span> <span class="meta">Vantiva Router</span></div>
-    <span class="meta">80, 443 · Gateway</span>
-  </div>
-  <div class="device">
-    <div><span class="status online"></span><span class="name">10.0.0.77</span> <span class="meta">Hikvision DS-2CD2142FWD-I</span></div>
-    <span class="meta">80, 554, 8899 · CVE-2021-36260</span>
-  </div>
-  <div class="device">
-    <div><span class="status online"></span><span class="name">10.0.0.88</span> <span class="meta">Dahua IPC-HDW4431C-A</span></div>
-    <span class="meta">80, 37777 · RPC2 bypass</span>
-  </div>
-  <div class="device">
-    <div><span class="status warning"></span><span class="name">10.0.0.118</span> <span class="meta">Generic OEM IP Camera</span></div>
-    <span class="meta">80, 8000, 8080</span>
-  </div>
-  <div class="device">
-    <div><span class="status offline"></span><span class="name">10.0.0.250</span> <span class="meta">Android/Fongo VoIP</span></div>
-    <span class="meta">53601</span>
-  </div>
-</div>
-</section>
-
-<section class="section">
-<h2>◢ Démarrage 60 secondes</h2>
-<pre><code># 1. Clone
+<div class="code"><span class="comment"># 1. Clone le repo</span>
 git clone https://github.com/187Ghost101/ghosteye.git
-cd ghosteye
+<span class="comment"># 2. Lance le proxy</span>
+cd ghosteye && python3 ghosteye_proxy.py 8082
+<span class="comment"># 3. Ouvre dans le browser</span>
+firefox http://localhost:8082
 
-# 2. Installe (Kali/Debian/Ubuntu)
-sudo apt install -y python3 ffmpeg
+<span class="comment"># Ou via Docker (1 ligne)</span>
+docker run -d -p 8082:8082 <span class="accent">187ghost101/ghosteye</span>
 
-# 3. Lance le proxy
-python3 ghosteye_proxy.py 8082
+<span class="comment"># Ou via Replit (1 clic cloud)</span>
+https://replit.com/github/187Ghost101/ghosteye</div>
 
-# 4. Ouvre
-firefox http://localhost:8082</code></pre>
-</section>
+<h2 style="color:var(--accent);font-size:14px;letter-spacing:1px;margin:25px 0 12px">🔱 LES 5 PHASES DU PROTOCOLE</h2>
 
-<section class="section">
-<h2>◢ Cross-platform</h2>
-<div class="grid grid-3">
-  <div class="card">
-    <h3>🐧 Linux</h3>
-    <p>Kali · Debian · Ubuntu · Arch · Manjaro</p>
-    <p><code>bash install.sh</code></p>
-  </div>
-  <div class="card">
-    <h3>🍎 macOS</h3>
-    <p>Homebrew natif</p>
-    <p><code>brew install python3 ffmpeg</code></p>
-  </div>
-  <div class="card">
-    <h3>🪟 Windows</h3>
-    <p>WSL2 recommandé</p>
-    <p><code>wsl --install -d Ubuntu</code></p>
-  </div>
-  <div class="card">
-    <h3>📱 Termux</h3>
-    <p>Android natif ou proot-distro</p>
-    <p><code>pkg install python ffmpeg</code></p>
-  </div>
-  <div class="card">
-    <h3>🐳 Docker</h3>
-    <p>Image officielle</p>
-    <p><code>docker run -p 8082:8082 187ghost101/ghosteye</code></p>
-  </div>
-  <div class="card">
-    <h3>☁ Replit</h3>
-    <p>One-click cloud</p>
-    <p><a href="https://replit.com/github/187Ghost101/ghosteye" style="color:var(--cyan)">replit.com/github/187Ghost101/ghosteye</a></p>
-  </div>
-</div>
-</section>
-
-<section class="section">
-<h2>◢ Accès cell depuis n'importe où</h2>
-<pre><code># bore.pub (gratuit, instant, zéro signup)
-curl -sL https://github.com/ekzhang/bore/releases/download/v0.5.2/bore-v0.5.2-x86_64-unknown-linux-musl.tar.gz | tar xz -C /tmp/ && sudo mv /tmp/bore /usr/local/bin/
-bore local 8082 --to bore.pub
-# → http://bore.pub:XXXXX → ouvre sur ton cell</code></pre>
-</section>
-
-<section class="section">
-<h2>◢ Le Protocole GHOST1O1</h2>
-<p style="text-align:center;color:var(--text-2);margin-bottom:20px">GHOSTEYE applique les phases 1 et 2 du protocole GHOST1O1 :</p>
-<div class="grid grid-3">
-  <div class="card" style="border-color:var(--cyan)">
-    <h3>① OBSERVER</h3>
-    <p>Scan réseau passif, table ARP, identifie le périmètre sans bruit.</p>
-  </div>
-  <div class="card" style="border-color:var(--cyan)">
-    <h3>② CARTOGRAPHIER</h3>
-    <p>ONVIF discovery, port scan focalisé, fingerprint services, graphe d'attaque.</p>
-  </div>
-  <div class="card" style="border-color:var(--text-2);opacity:0.5">
-    <h3>③ INSTRUMENTER</h3>
-    <p>Outils minimalistes, reproductibles, documentés (Phase 3 — autres repos).</p>
-  </div>
-</div>
-<p style="text-align:center;margin-top:20px"><a href="https://github.com/187Ghost101/ghost1o1/blob/main/PROTOCOL.md" class="btn btn-cyan">VOIR LE PROTOCOLE COMPLET</a></p>
-</section>
-
-<section class="section">
-<h2>◢ L'écosystème GHOST1O1</h2>
-<div class="grid grid-3">
-  <div class="card">
-    <h3>🎯 ghosteye</h3>
-    <p>Caméras IoT, RTSP, ONVIF</p>
-    <p><a href="https://github.com/187Ghost101/ghosteye" style="color:var(--cyan)">github.com/187Ghost101/ghosteye</a></p>
-  </div>
-  <div class="card">
-    <h3>🏴‍☠️ ycc365-ghost</h3>
-    <p>Reverse firmware YCC365 / Hipcam</p>
-    <p><a href="https://github.com/187Ghost101/ycc365-ghost" style="color:var(--cyan)">github.com/187Ghost101/ycc365-ghost</a></p>
-  </div>
-  <div class="card">
-    <h3>🎣 phishcloner-ultimate</h3>
-    <p>AiTM phishing, 9 modules, 20 templates</p>
-    <p><a href="https://github.com/187Ghost101/phishcloner-ultimate" style="color:var(--cyan)">github.com/187Ghost101/phishcloner-ultimate</a></p>
-  </div>
-  <div class="card">
-    <h3>🧬 biobypass</h3>
-    <p>15 vecteurs anti-biométrie</p>
-    <p><a href="https://github.com/187Ghost101/biobypass" style="color:var(--cyan)">github.com/187Ghost101/biobypass</a></p>
-  </div>
-  <div class="card">
-    <h3>🔍 quebec-ultimate</h3>
-    <p>OSINT chaîné récursif</p>
-    <p><a href="https://github.com/187Ghost101/quebec-ultimate" style="color:var(--cyan)">github.com/187Ghost101/quebec-ultimate</a></p>
-  </div>
-  <div class="card">
-    <h3>🎨 ghost1o1-design</h3>
-    <p>Design system hacker NOCTURNE</p>
-    <p><a href="https://github.com/187Ghost101/ghost1o1-design" style="color:var(--cyan)">github.com/187Ghost101/ghost1o1-design</a></p>
-  </div>
-</div>
-</section>
-
+<div class="features">
+<div class="feat"><div class="ttl">1. OBSERVER</div><div class="desc">Comprendre AVANT d'agir. Scan passif, ARP, capture trafic.</div></div>
+<div class="feat"><div class="ttl">2. CARTOGRAPHIER</div><div class="desc">Dessiner la cible. Topologie, services, dépendances.</div></div>
+<div class="feat"><div class="ttl">3. INSTRUMENTER</div><div class="desc">Outils minimaux, reproductibles, documentés.</div></div>
+<div class="feat"><div class="ttl">4. EXPLOITER</div><div class="desc">La preuve remplace la destruction. Le rapport remplace le flex.</div></div>
+<div class="feat"><div class="ttl">5. PARTAGER</div><div class="desc">Transmission non-négociable. Le savoir n'est pas une propriété.</div></div>
 </div>
 
-<div class="footer">
-  <div class="sigil">G H O S T 1 O 1</div>
-  <div class="links">
-    <a href="https://github.com/187Ghost101/ghost1o1">HUB</a> ·
-    <a href="https://github.com/187Ghost101/ghost1o1/blob/main/MANIFESTO.md">MANIFESTE</a> ·
-    <a href="https://github.com/187Ghost101/ghost1o1/blob/main/PROTOCOL.md">PROTOCOLE</a> ·
-    <a href="https://github.com/187Ghost101/ghost1o1/tree/main/tutorials">TUTORIELS</a>
-  </div>
-  <p style="margin-top:20px"><em>Forged in the dark by <a href="https://github.com/187Ghost101" style="color:var(--cyan)">ghost1o1</a> — 2026</em></p>
-  <p style="margin-top:10px;font-style:italic;color:var(--accent)">"There is no lock."</p>
+<h2 style="color:var(--accent);font-size:14px;letter-spacing:1px;margin:25px 0 12px">📦 LES 6 OUTILS DU MOUVEMENT</h2>
+
+<div class="actions">
+<a class="action" href="https://github.com/187Ghost101/ghosteye"><div class="ico">🎯</div><div class="ttl">GHOSTEYE</div><div class="desc">Plateforme RTSP/HLS caméras IoT</div></a>
+<a class="action" href="https://github.com/187Ghost101/ycc365-ghost"><div class="ico">🏴‍☠️</div><div class="ttl">YCC365 GHOST</div><div class="desc">Scanner firmware YCC365/Hipcam</div></a>
+<a class="action" href="https://github.com/187Ghost101/phishcloner-ultimate"><div class="ico">🎣</div><div class="ttl">PHISHCLONER</div><div class="desc">Framework AiTM pédagogique</div></a>
+<a class="action" href="https://github.com/187Ghost101/biobypass"><div class="ico">🧬</div><div class="ttl">BIOBYPASS</div><div class="desc">15 vecteurs anti-biométrie</div></a>
+<a class="action" href="https://github.com/187Ghost101/quebec-ultimate"><div class="ico">🔍</div><div class="ttl">QUEBEC ULT.</div><div class="desc">OSINT chaînage récursif</div></a>
+<a class="action" href="https://github.com/187Ghost101/ghost1o1-design"><div class="ico">🎨</div><div class="ttl">DESIGN SYS</div><div class="desc">UI/UX hacker avant-gardiste</div></a>
 </div>
 
+<h2 style="color:var(--accent);font-size:14px;letter-spacing:1px;margin:25px 0 12px">📚 TUTORIELS FLAGSHIP</h2>
+
+<div class="actions">
+<a class="action" href="https://github.com/187Ghost101/ghost1o1/blob/main/tutorials/TUTORIAL_01_OBSERVER.md"><div class="ico">👁️</div><div class="ttl">TUTORIAL 01 — OBSERVER</div><div class="desc">Phase 1 du protocole. Scan passif, méthodes d'observation, piège à éviter.</div></a>
+<a class="action" href="https://github.com/187Ghost101/ghost1o1/blob/main/tutorials/TUTORIAL_02_CARTOGRAPHIER.md"><div class="ico">🗺️</div><div class="ttl">TUTORIAL 02 — CARTOGRAPHIER</div><div class="desc">Phase 2. Schéma, matrice de risque, identification chemins d'attaque.</div></a>
+<a class="action" href="https://github.com/187Ghost101/ghost1o1/blob/main/tutorials/TUTORIAL_03_INSTRUMENTER.md"><div class="ico">🔧</div><div class="ttl">TUTORIAL 03 — INSTRUMENTER</div><div class="desc">Phase 3. PoC minimal, reproductible, dry-run, transmission.</div></a>
+</div>
+
+<div class="quote">
+<em>"There is no lock."</em><br>
+<em>"Du silence naît la lumière."</em><br>
+<em>"Là où l'ignorance dort, nous allumons."</em>
+</div>
+
+<footer>
+L'ÉVEIL NOCTURNE · Forged in the dark by <a href="https://github.com/187Ghost101">ghost1o1</a> · 2026
+</footer>
+
+</div>
 </body>
 </html>
