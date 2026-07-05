@@ -1,17 +1,17 @@
-run = "python3 ghosteye_proxy.py 8080"
-entrypoint = "main.py"
+run = "python3 ghosteye_proxy.py 8082"
+
+entrypoint = "python3 ghosteye_proxy.py 8082"
 
 [env]
 PYTHONUNBUFFERED = "1"
-
-[nix]
-channel = "stable-23.11"
+PORT = "8082"
 
 [packager]
 language = "python3"
+ignoredDirs = ["__pycache__", ".git", "node_modules"]
 
-[packager.features]
-enabledForHosting = false
+[nix]
+channel = "stable-23_11"
 
 [gitHubImport]
-requiredFiles = [".replit", "replit.nix", "main.py", "ghosteye_proxy.py"]
+requiredFiles = [".replit", "replit.nix", "ghosteye_proxy.py", "index.html"]
