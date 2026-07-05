@@ -1,0 +1,17 @@
+run = "python3 ghosteye_proxy.py 8080"
+entrypoint = "main.py"
+
+[env]
+PYTHONUNBUFFERED = "1"
+
+[nix]
+channel = "stable-23.11"
+
+[packager]
+language = "python3"
+
+[packager.features]
+enabledForHosting = false
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "main.py", "ghosteye_proxy.py"]
