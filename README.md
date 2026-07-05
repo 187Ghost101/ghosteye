@@ -8,7 +8,7 @@
    ▀████▀ ██  ██ ▀█████ ██   ██  ██   ██ ▀█████   ▀███▀██▄██  ▀███▀
 ```
 
-![GHOST1O1](https://img.shields.io/badge/GHOST1O1-NOCTURNE-e63946?style=for-the-badge&logo=ghost&logoColor=white)
+![GHOST1O1](https://img.shields.io/badge/GHOST1O1-L'EVEIL_NOCTURNE-e63946?style=for-the-badge&logo=ghost&logoColor=white)
 ![Version](https://img.shields.io/badge/VERSION-12.0-00d4ff?style=for-the-badge)
 ![Status](https://img.shields.io/badge/STATUS-OPERATIONAL-2ecc71?style=for-the-badge)
 ![Platforms](https://img.shields.io/badge/OS-LINUX%20%7C%20MAC%20%7C%20WIN%20%7C%20TERMUX-9b59b6?style=for-the-badge)
@@ -19,6 +19,9 @@
 **Audit caméras IoT en 60 secondes. Dashboard live, 9 panels, zero install complexe.**
 
 [Demo Live](https://187ghost101.github.io/ghosteye/) · [Replit](https://replit.com/github/187Ghost101/ghosteye) · [Docker](https://hub.docker.com/r/187ghost101/ghosteye) · [Tutorial](https://github.com/187Ghost101/ghost1o1/blob/main/tutorials/TUTORIAL_01_OBSERVER.md)
+
+> *Là où l'ignorance dort, nous allumons.*
+> *There is no lock.*
 
 </div>
 
@@ -37,10 +40,10 @@ Conçu pour le **Protocole GHOST1O1** — phase 1 (Observer) et phase 2 (Cartogr
 ## ✨ Features
 
 - **9 panels intégrés** : Streams, Discovery, Shodan, ONVIF, PortScan, RTSP Brute, Credentials, Exploit, Shells, Persistence
-- **Proxy HLS natif** : RTSP → HLS dans le browser, zéro plugin, zero flash
+- **Proxy HLS natif** : RTSP → HLS dans le browser, zéro plugin, zéro flash
 - **Recon en un clic** : 55 paths RTSP pré-chargés, ONVIF WS-Discovery, port scan async
 - **Dashboard responsive** : fonctionne sur cell/tablette/4K
-- **Mode DEMO sans proxy** : ouvre `ghosteye.html` direct dans le browser, 5 devices mockés
+- **Mode DEMO sans proxy** : ouvre `index.html` direct dans le browser, 5 devices mockés
 - **Tunnel instantané** : bore.pub, ngrok, SSH — accès cell depuis n'importe où
 - **Rapport JSON** : export one-click de toute l'opération
 - **Multi-OS** : Linux, macOS, Windows WSL2, Termux, Docker, Replit
@@ -95,7 +98,7 @@ python3 ghosteye_proxy.py 8082
 
 ### Méthode 6 — Sans rien installer (DEMO_MODE)
 
-Ouvre `ghosteye.html` directement dans le browser. Le dashboard charge en mode démo avec 5 devices mockés visibles. **Aucune dépendance, aucun proxy, aucun réseau.**
+Ouvre `index.html` directement dans le browser. Le dashboard charge en mode démo avec 5 devices mockés visibles. **Aucune dépendance, aucun proxy, aucun réseau.**
 
 ```bash
 git clone https://github.com/187Ghost101/ghosteye.git
@@ -126,17 +129,14 @@ bore local 8082 --to bore.pub
 ```bash
 # 1. Découverte automatique
 curl -X POST http://localhost:8082/onvif/discover -H 'Content-Type: application/json' -d '{}'
-# → [{"ip":"10.0.0.77","brand":"Hikvision",...}]
 
 # 2. Probe ONVIF
 curl -X POST http://localhost:8082/onvif/probe -H 'Content-Type: application/json' \
   -d '{"ip":"10.0.0.77"}'
-# → {"manufacturer":"Hikvision","model":"DS-2CD2142FWD-I","firmware":"V5.5.0"}
 
 # 3. RTSP brute (55 paths)
 curl -X POST http://localhost:8082/rtsp/brute -H 'Content-Type: application/json' \
   -d '{"ip":"10.0.0.77"}'
-# → ["rtsp://10.0.0.77:554/Streaming/Channels/101", ...]
 
 # 4. Ajout stream + visualisation
 curl -X POST http://localhost:8082/add -H 'Content-Type: application/json' \
@@ -157,7 +157,6 @@ firefox http://localhost:8082
 ```bash
 curl -X POST http://localhost:8082/scan/ports -H 'Content-Type: application/json' \
   -d '{"target":"192.168.1.0/24","ports":[80,554,8899,37777,8080,9527,34567]}'
-# → {"results":[{"ip":"192.168.1.77","open":[80,554,8899]},...]}
 ```
 
 ---
@@ -168,10 +167,9 @@ curl -X POST http://localhost:8082/scan/ports -H 'Content-Type: application/json
 ┌─────────────────────────────────────────────────────────────┐
 │                    Browser (Firefox/Chrome)                  │
 │  ┌────────────────────────────────────────────────────┐    │
-│  │  ghosteye.html — Dashboard v12.0                   │    │
-│  │  • 9 panels (Streams, Discovery, Shodan, ONVIF...) │    │
+│  │  index.html — Dashboard v12.0                       │    │
+│  │  • 9 panels + DEMO_MODE sans proxy                  │    │
 │  │  • HLS.js pour la lecture vidéo                     │    │
-│  │  • Fetch() pour les appels API                     │    │
 │  └────────────────┬───────────────────────────────────┘    │
 └───────────────────┼─────────────────────────────────────────┘
                     │ HTTP / WebSocket
@@ -211,100 +209,64 @@ curl -X POST http://localhost:8082/scan/ports -H 'Content-Type: application/json
 | GET | `/{id}/seg_XXX.ts` | — | HLS segments |
 | POST | `/onvif/discover` | `{}` | WS-Discovery multicast |
 | POST | `/onvif/probe` | `{ip}` | GetDeviceInformation SOAP |
-| POST | `/scan/ports` | `{target, ports}` | Port scan async |
+| POST | `/scan/ports` | `{target, ports}` | Async port scan |
 | POST | `/rtsp/brute` | `{ip}` | 55 paths RTSP brute |
+| GET | `/api/streams/discovered` | — | Streams auto-découverts |
 
 ---
 
-## 🛠️ Stack
+## 🔐 Légalité & Éthique
 
-- **Python 3.12+** (asyncio stdlib)
-- **ffmpeg** (HLS transcoding)
-- **HLS.js** (browser, CDN)
-- **Vanilla JS** (no framework, no build step)
-- **HTML/CSS pur** (single file, 58KB)
+GHOSTEYE est un outil **éducatif et de recherche**. Utilisation autorisée uniquement sur :
+- Tes propres équipements (lab perso)
+- Cibles avec **autorisation écrite** explicite
+- Environnements de CTF / HackTheBox / TryHackMe
+- Audits de sécurité contractuels
 
----
+**Pas d'utilisation sur des caméras de tiers sans permission.** La méthodologie GHOST1O1 impose la **preuve**, pas la destruction.
 
-## 📂 Structure
-
-```
-ghosteye/
-├── ghosteye.html          # Dashboard v12.0 (58KB, 9 panels)
-├── ghosteye_proxy.py      # Proxy v3.0 (HLS + recon)
-├── ghosteye_mission.sh    # Launcher
-├── install.sh             # Auto-install multi-OS
-├── Dockerfile             # Image Docker
-├── docker-compose.yml     # Compose
-├── .replit                # Replit config
-├── README.md              # Ce fichier
-├── INSTALL.md             # Guide install détaillé par OS
-├── USAGE.md               # Exemples avancés
-├── CHANGELOG.md           # Historique versions
-├── LICENSE                # MIT
-├── SECURITY.md            # Politique disclosure
-└── GHOST1O1_BRAND.md      # Brand kit
-```
+📜 **[SECURITY.md](SECURITY.md)** — politique complète
 
 ---
 
-## 🗺️ Roadmap
+## 🛣️ Roadmap
 
-- [x] v3.0 — HLS + recon endpoints (ONVIF/PortScan/RTSP brute)
-- [x] v6.1 — Smart dashboard (auto-detect proxyHost)
-- [x] v12.0 — 9 panels + Shodan integration
-- [ ] v13.0 — Mode record + replay timeline
-- [ ] v14.0 — Multi-target concurrent
-- [ ] v15.0 — WebRTC P2P (latency < 500ms)
+- [x] Proxy HLS multi-stream
+- [x] ONVIF WS-Discovery + Probe
+- [x] RTSP brute 55 paths
+- [x] Dashboard 9 panels
+- [x] DEMO_MODE standalone
+- [x] Cross-platform (Linux/Mac/Win/Termux/Docker)
+- [ ] ONVIF PTZ control
+- [ ] Audio RTSP support
+- [ ] Multi-cam grid view
+- [ ] AI detection (motion, faces, plates)
+- [ ] Mobile app native
 
 ---
 
 ## 🤝 Contribution
 
-GHOSTEYE vit grâce à ses contributeurs. PRs bienvenues pour :
-- Nouveaux panels (Shodan, Censys, BinaryEdge)
-- Nouveaux paths RTSP (marques exotiques)
-- Traductions (FR, ES, DE, PT, RU)
-- Bugfixes (PR avec test obligatoire)
+L'ÉVEIL NOCTURNE vit grâce à ses contributeurs. Avant de proposer un PR :
+1. Lis le code, chaque ligne est une décision
+2. Teste sur 2 OS minimum
+3. Signe ton travail
+4. Pas de drama, pas d'ego, pas de gatekeeping
 
-📜 **[CONTRIBUTING.md](https://github.com/187Ghost101/ghost1o1/blob/main/CONTRIBUTING.md)**
-
----
-
-## 🔒 Sécurité & Légalité
-
-**GHOSTEYE est un outil éducatif et de pentest autorisé.** Tu es responsable de ce que tu en fais.
-
-- ✅ Lab personnel
-- ✅ Tests sur ton propre équipement
-- ✅ Audits avec **autorisation écrite**
-- ❌ Caméras d'autrui sans permission
-- ❌ Exfiltration / diffusion non autorisée
-
-📜 **[SECURITY.md](https://github.com/187Ghost101/ghost1o1/blob/main/SECURITY.md)** — politique complète
+📜 **[CONTRIBUTING.md](CONTRIBUTING.md)**
 
 ---
 
 ## 📜 Licence
 
-MIT — voir [LICENSE](https://github.com/187Ghost101/ghosteye/blob/main/LICENSE)
-
----
-
-## 🔗 Liens
-
-- **Hub GHOST1O1** : [github.com/187Ghost101/ghost1o1](https://github.com/187Ghost101/ghost1o1)
-- **Méthodologie** : [PROTOCOL.md](https://github.com/187Ghost101/ghost1o1/blob/main/PROTOCOL.md)
-- **Manifeste** : [MANIFESTO.md](https://github.com/187Ghost101/ghost1o1/blob/main/MANIFESTO.md)
-- **Tutoriels** : [TUTORIALS/](https://github.com/187Ghost101/ghost1o1/tree/main/tutorials)
-- **Auteur** : [@187Ghost101](https://github.com/187Ghost101)
+**MIT License** — Tu peux forker, modifier, redistribuer, commercialiser. Garde la signature `ghost1o1`, ne gates pas l'accès.
 
 ---
 
 <div align="center">
 
-### Forged in the dark by [ghost1o1](https://github.com/187Ghost101) — 2026
+### **L'ÉVEIL NOCTURNE** · Forged in the dark by [ghost1o1](https://github.com/187Ghost101) — 2026
 
-*"There is no lock."*
+*There is no lock. Du silence naît la lumière.*
 
 </div>
