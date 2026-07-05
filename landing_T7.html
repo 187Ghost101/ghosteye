@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="L'ÉVEIL NOCTURNE — Là où l'ignorance dort, nous allumons. Un mouvement. Une approche. Un signal.">
+<title>L'ÉVEIL NOCTURNE — Le Signal approche</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #0f0f1a;
+  --bg3: #141428;
+  --border: #1a1a35;
+  --accent: #e63946;
+  --gold: #f4a261;
+  --cyan: #00d4ff;
+  --green: #2ecc71;
+  --lunar: #e8e8f0;
+  --text: #c8c8d0;
+  --text2: #8888a0;
+  --font: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  background: var(--bg);
+  color: var(--lunar);
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, rgba(244,162,97,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.frame {
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.sigil {
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(244,162,97,0.4);
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeIn 3s ease-in 0.5s forwards;
+  white-space: pre;
+  letter-spacing: 1px;
+}
+.sigil .eye {
+  color: var(--accent);
+  animation: pulse 4s ease-in-out infinite;
+}
+.tagline {
+  font-style: italic;
+  color: var(--text2);
+  font-size: 13px;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: fadeIn 2s ease-in 2s forwards;
+  letter-spacing: 0.5px;
+}
+.tagline em { color: var(--cyan); font-style: normal; }
+.countdown {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 30px 20px;
+  margin: 30px 0;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 2s ease-in 2.5s forwards;
+}
+.countdown::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.countdown-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--text2);
+  margin-bottom: 20px;
+}
+.countdown-time {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--lunar);
+  flex-wrap: wrap;
+}
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+.countdown-num {
+  font-size: 48px;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(244,162,97,0.3);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.countdown-suffix {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text2);
+  margin-top: 8px;
+}
+.message {
+  margin: 50px 0;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 2s ease-in 3.5s forwards;
+}
+.message::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.message p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 15px;
+}
+.message p:last-child { margin-bottom: 0; }
+.message .quote {
+  font-style: italic;
+  color: var(--cyan);
+  text-align: center;
+  margin-top: 25px;
+  font-size: 16px;
+}
+.signature {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeIn 2s ease-in 4.5s forwards;
+}
+.signature .name {
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.signature .meta {
+  font-size: 10px;
+  color: var(--text2);
+  letter-spacing: 1px;
+}
+.subscribe {
+  margin-top: 30px;
+  opacity: 0;
+  animation: fadeIn 2s ease-in 5s forwards;
+}
+.subscribe-form {
+  display: flex;
+  gap: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.subscribe-input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--lunar);
+  padding: 10px 14px;
+  font-family: var(--font);
+  font-size: 12px;
+  border-radius: 4px;
+}
+.subscribe-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+.subscribe-btn {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: white;
+  padding: 10px 20px;
+  font-family: var(--font);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.subscribe-btn:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+.subscribe-note {
+  font-size: 9px;
+  color: var(--text2);
+  margin-top: 12px;
+  font-style: italic;
+}
+.footer {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: var(--text2);
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeIn 2s ease-in 5.5s forwards;
+}
+.footer a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@media (max-width: 600px) {
+  .sigil { font-size: 10px; }
+  .countdown-time { gap: 10px; }
+  .countdown-num { font-size: 32px; }
+  .countdown-unit { min-width: 50px; }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+
+<pre class="sigil">
+      ☾
+     ╱ ╲
+    ╱   ╲
+   │  <span class="eye">◉</span>  │
+   │     │         L'ÉVEIL
+    ╲   ╱          NOCTURNE
+     ╲ ╱
+      ╳
+</pre>
+
+<div class="tagline">
+<em>There is no lock.</em> &nbsp;·&nbsp; <em>Du silence naît la lumière.</em>
+</div>
+
+<div class="countdown">
+  <div class="countdown-label">Le signal dans</div>
+  <div class="countdown-time">
+    <div class="countdown-unit">
+      <span class="countdown-num" id="days">07</span>
+      <span class="countdown-suffix">Jours</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="hours">00</span>
+      <span class="countdown-suffix">Heures</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="minutes">00</span>
+      <span class="countdown-suffix">Minutes</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="seconds">00</span>
+      <span class="countdown-suffix">Secondes</span>
+    </div>
+  </div>
+</div>
+
+<div class="message">
+  <p>Pour les brebis noires.</p>
+  <p>Pour les curieux solitaires.</p>
+  <p>Pour ceux qui ne rentrent dans aucune case.</p>
+  <p class="quote">Là où l'ignorance dort,<br>nous allumons.</p>
+</div>
+
+<div class="subscribe">
+  <form class="subscribe-form" onsubmit="subscribe(event)">
+    <input type="email" class="subscribe-input" placeholder="ton@email" required>
+    <button type="submit" class="subscribe-btn">Je m'éveille</button>
+  </form>
+  <p class="subscribe-note">Aucune pub. Un seul email quand le signal arrive.</p>
+</div>
+
+<div class="signature">
+  <div class="name">— s.</div>
+  <div class="meta">L'ÉVEIL NOCTURNE · 2026</div>
+</div>
+
+<div class="footer">
+  <a href="https://github.com/187Ghost101/ghost1o1">github.com/187Ghost101/ghost1o1</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/187Ghost101/ghost1o1/blob/main/SIGNAL.md">SIGNAL.md</a>
+</div>
+
+</div>
+
+<script>
+// Compte à rebours — J-7 (modifiable)
+const TARGET = new Date();
+TARGET.setDate(TARGET.getDate() + 7);
+TARGET.setHours(22, 0, 0, 0);
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = TARGET - now;
+  if (diff <= 0) {
+    document.getElementById('days').textContent = '00';
+    document.getElementById('hours').textContent = '00';
+    document.getElementById('minutes').textContent = '00';
+    document.getElementById('seconds').textContent = '00';
+    return;
+  }
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const s = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('days').textContent = String(d).padStart(2, '0');
+  document.getElementById('hours').textContent = String(h).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Subscribe handler (placeholder — point vers GitHub Discussions)
+function subscribe(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('input').value;
+  // Redirection vers la page Discussions du hub
+  window.location.href = 'https://github.com/187Ghost101/ghost1o1/discussions';
+}
+</script>
+</body>
+</html>
