@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#f4a261" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f4a261" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8e8f0"/>
+      <stop offset="100%" stop-color="#8888a0"/>
+    </linearGradient>
+    <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e63946"/>
+      <stop offset="100%" stop-color="#9b1c2a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background glow -->
+  <rect width="400" height="500" fill="url(#glow)"/>
+
+  <!-- Moon (crescent) -->
+  <g transform="translate(200,140)">
+    <circle r="50" fill="url(#moonGrad)" opacity="0.9"/>
+    <circle r="50" cx="20" cy="-10" fill="#0a0a0f"/>
+  </g>
+
+  <!-- Eye (open) -->
+  <g transform="translate(200,260)">
+    <ellipse rx="40" ry="20" fill="none" stroke="#e8e8f0" stroke-width="2"/>
+    <circle r="12" fill="url(#eyeGrad)"/>
+    <circle r="5" cx="0" cy="0" fill="#0a0a0f"/>
+    <circle r="2" cx="3" cy="-3" fill="#e8e8f0" opacity="0.8"/>
+  </g>
+
+  <!-- Diverging paths (X) -->
+  <g stroke="#00d4ff" stroke-width="2" fill="none" opacity="0.8">
+    <line x1="160" y1="380" x2="240" y2="340"/>
+    <line x1="240" y1="380" x2="160" y2="340"/>
+    <circle cx="160" cy="380" r="4" fill="#00d4ff"/>
+    <circle cx="240" cy="380" r="4" fill="#00d4ff"/>
+    <circle cx="160" cy="340" r="4" fill="#00d4ff"/>
+    <circle cx="240" cy="340" r="4" fill="#00d4ff"/>
+    <circle cx="200" cy="380" r="4" fill="#e63946"/>
+  </g>
+
+  <!-- Text -->
+  <text x="200" y="430" font-family="JetBrains Mono, monospace" font-size="14"
+        fill="#f4a261" text-anchor="middle" letter-spacing="3">L'ÉVEIL</text>
+  <text x="200" y="455" font-family="JetBrains Mono, monospace" font-size="14"
+        fill="#f4a261" text-anchor="middle" letter-spacing="3">NOCTURNE</text>
+  <text x="200" y="485" font-family="JetBrains Mono, monospace" font-size="9"
+        fill="#8888a0" text-anchor="middle" letter-spacing="2">2026</text>
+</svg>
